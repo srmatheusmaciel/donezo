@@ -1,4 +1,4 @@
-package com.matheusmaciel.donezo.user.Task;
+package com.matheusmaciel.donezo.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +14,7 @@ public class TaskController {
 
   @PostMapping("/")
   public TaskModel create(@RequestBody TaskModel taskModel) {
+    System.out.println("Cheguei no controller");
     var task = this.taskRepository.save(taskModel);
     return task;
   } 

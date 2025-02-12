@@ -1,4 +1,4 @@
-package com.matheusmaciel.donezo.user.Task;
+package com.matheusmaciel.donezo.task;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
