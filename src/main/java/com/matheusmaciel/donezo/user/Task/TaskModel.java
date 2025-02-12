@@ -21,7 +21,7 @@ public class TaskModel {
 
   @Column(length = 50, nullable = false)
   private String title;
-  @Column(length = 240, nullable = false)
+  @Column(length = 244, nullable = false)
   private String description;
 
   
