@@ -20,7 +20,8 @@ public class TaskController {
   private TaskRepository taskRepository;
 
   @PostMapping("/")
-  public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletRequest request) {
+  public ResponseEntity create(@RequestBody TaskModel taskModel,
+                                HttpServletRequest request) {
     var userId = request.getAttribute("userId");
     taskModel.setUserId((UUID) userId);
    
@@ -28,8 +29,15 @@ public class TaskController {
     // 15/02/2025 - Start date
 
     var currentDate = LocalDateTime.now();
-    if(currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Start date / end date must be in the future");
+    if(currentDate.isAfter(taskModel.getStartAt()) ||
+       currentDate.isAfter(taskModel.getEndAt())) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("Start date / end date must be in the future");
+    }
+
+    if(taskModel.getStartAt().isAfter(taskModel.getEndAt())) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("Start date must be before end date");
     }
   
     var task = this.taskRepository.save(taskModel);
