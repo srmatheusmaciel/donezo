@@ -64,11 +64,13 @@ public class TaskController {
     var task = this.taskRepository.findById(id).orElse(null);
 
     if(task == null) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task not found");
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("Task not found");
     }
 
     if(!task.getUserId().equals(userId)) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not authorized to update this task");
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      .body("User not authorized to update this task");
     }
 
     Utils.copyNonNullProperties(taskModel, task);
